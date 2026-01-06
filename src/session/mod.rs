@@ -203,7 +203,7 @@ impl Session {
 	/// # }
 	/// ```
 	#[cfg(not(target_arch = "wasm32"))]
-	pub fn run<'s, 'i, 'v: 'i, const N: usize>(&'s mut self, input_values: impl Into<SessionInputs<'i, 'v, N>>) -> Result<SessionOutputs<'s>> {
+	pub fn run<'s, 'i, 'v: 'i, const N: usize>(&'s self, input_values: impl Into<SessionInputs<'i, 'v, N>>) -> Result<SessionOutputs<'s>> {
 		match input_values.into() {
 			SessionInputs::ValueSlice(input_values) => {
 				self.run_inner(self.inputs.iter().map(|input| input.name()).collect(), input_values.iter().collect(), None)
